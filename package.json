@@ -1,0 +1,26 @@
+{
+    "name": "run-gut-tests-action",
+    "version": "1.0.0",
+    "description": "",
+    "main": "dist/main.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "package": "ncc build main.js -o dist"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/josephbmanley/run-gut-tests-action.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/josephbmanley/run-gut-tests-action/issues"
+    },
+    "homepage": "https://github.com/josephbmanley/run-gut-tests-action#readme",
+    "dependencies": {
+      "@actions/core": "^1.2.4",
+      "@zeit/ncc": "^0.22.3",
+      "dockerode": "^3.2.1"
+    }
+  }

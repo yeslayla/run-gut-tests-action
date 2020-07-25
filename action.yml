@@ -1,0 +1,16 @@
+name: "Run GUT Tests"
+description: "Run GUT tests for a Godot project"
+author: "josephbmanley"
+inputs:
+  containerImage:
+    description: "The container to run tests inside of."
+    default: "barichello/godot-ci:latest"
+  directory:
+    description: "The name directory to run tests in."
+    required: false
+runs:
+  using: "node12"
+  main: "dist/index.js"
+branding:
+  icon: cpu
+  color: yellow
