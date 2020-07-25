@@ -25,18 +25,25 @@ try {
     function onFinished(err, output)
     {
       console.log("Starting image...")
-      docker.run(docker_image, ['godot', '-d', '-s', '--path /builder', 'addons/gut/gut_cmdln.gd'], process.stdout, 
+      docker.run(docker_image, ['godot', '-d', '-s', '--path', '/project', 'addons/gut/gut_cmdln.gd'], process.stdout, 
       
-      // Mount working directory to `/builder`
-      { HostConfig: { Binds: [ process.cwd() + ":/builder" ] }},
+      // Mount working directory to `/project`
+      { HostConfig: { Binds: [ process.cwd() + ":/project" ] }},
       
       function (err, data, container) {
 
         if(err)
         {
-          console.log(err);
+          core.setFailed(error.message);
         }
-      
+
+        console.log("Tests exited with status: " + data.StatusCode);
+
+        if( data.StatusCode != "0" )
+        {
+            core.setFailed("GUT tests failed!");
+        }
+    
       })
     }
     function onProgress(event) {}
