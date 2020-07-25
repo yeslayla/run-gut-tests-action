@@ -12191,7 +12191,10 @@ try {
   var docker_image = core.getInput('containerImage');
   var work_dir = core.getInput('directory');
 
-  process.chdir(work_dir);
+  if(work_dir)
+  {
+    process.chdir(work_dir);
+  }
 
   // Pull docker image for building
   console.log("Pulling build image...");
