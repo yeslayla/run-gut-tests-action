@@ -7,7 +7,7 @@ inputs:
     default: "barichello/godot-ci:latest"
   directory:
     description: "The name directory to run tests in."
-    required: false
+    defaut: "."
 runs:
   using: "node12"
   main: "dist/index.js"
