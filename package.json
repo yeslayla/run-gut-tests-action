@@ -19,7 +19,7 @@
     },
     "homepage": "https://github.com/josephbmanley/run-gut-tests-action#readme",
     "dependencies": {
-      "@actions/core": "^1.2.4",
+      "@actions/core": "^1.2.6",
       "@zeit/ncc": "^0.22.3",
       "dockerode": "^3.2.1"
     }
