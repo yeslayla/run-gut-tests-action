@@ -35,7 +35,7 @@ try {
       
       function (err, data, container) {
         
-        console.log("DATA: " + String(data))
+        console.log("DATA: " + String(data[0]))
 
         if(err)
         {
