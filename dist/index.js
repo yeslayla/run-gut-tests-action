@@ -12179,7 +12179,8 @@ function plural(ms, msAbs, n, name) {
 
 const core = __webpack_require__(470);
 const fs = __webpack_require__(747);
-const path = __webpack_require__(622)
+const path = __webpack_require__(622);
+const stream = __webpack_require__(413);
 
 // Setup Docker
 const Docker = __webpack_require__(965);
@@ -12196,6 +12197,13 @@ try {
     process.chdir(work_dir);
   }
 
+  var test_handler = new stream.Writable({
+    write: function(chunk, encoding, next) {
+      console.log("LINE: " + chunk.toString());
+      next();
+    }
+  });
+
   // Pull docker image for building
   console.log("Pulling build image...");
   docker.pull(docker_image, function(err, stream)
@@ -12206,15 +12214,13 @@ try {
     // Wait to run build until after pull complete
     function onFinished(err, output)
     {
-      console.log("Starting image...")
-      docker.run(docker_image, ['godot', '-d', '-s', '--path', '/project', 'addons/gut/gut_cmdln.gd'], process.stdout, 
+      console.log("Starting image...");
+      docker.run(docker_image, ['godot', '-d', '-s', '--path', '/project', 'addons/gut/gut_cmdln.gd'], test_handler, 
       
       // Mount working directory to `/project`
       { HostConfig: { Binds: [ process.cwd() + ":/project" ] }},
       
       function (err, data, container) {
-        
-        console.log("DATA: " + String(data[0]))
 
         if(err)
         {

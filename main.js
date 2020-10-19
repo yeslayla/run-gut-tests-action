@@ -1,6 +1,7 @@
 const core = require('@actions/core');
 const fs = require('fs');
-const path = require('path')
+const path = require('path');
+const stream = require('stream');
 
 // Setup Docker
 const Docker = require('dockerode');
@@ -17,6 +18,13 @@ try {
     process.chdir(work_dir);
   }
 
+  var test_handler = new stream.Writable({
+    write: function(chunk, encoding, next) {
+      console.log("LINE: " + chunk.toString());
+      next();
+    }
+  });
+
   // Pull docker image for building
   console.log("Pulling build image...");
   docker.pull(docker_image, function(err, stream)
@@ -27,15 +35,13 @@ try {
     // Wait to run build until after pull complete
     function onFinished(err, output)
     {
-      console.log("Starting image...")
-      docker.run(docker_image, ['godot', '-d', '-s', '--path', '/project', 'addons/gut/gut_cmdln.gd'], process.stdout, 
+      console.log("Starting image...");
+      docker.run(docker_image, ['godot', '-d', '-s', '--path', '/project', 'addons/gut/gut_cmdln.gd'], test_handler, 
       
       // Mount working directory to `/project`
       { HostConfig: { Binds: [ process.cwd() + ":/project" ] }},
       
       function (err, data, container) {
-        
-        console.log("DATA: " + String(data[0]))
 
         if(err)
         {
