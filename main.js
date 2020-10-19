@@ -34,6 +34,8 @@ try {
       { HostConfig: { Binds: [ process.cwd() + ":/project" ] }},
       
       function (err, data, container) {
+        
+        console.log("DATA: " + String(data))
 
         if(err)
         {
