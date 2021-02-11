@@ -26,6 +26,10 @@ steps:
 
     The name directory to run tests within. Defaults to the current directory.
 
+#### useContainer
+
+    Boolean value of whether or not to run container. Defaults to `true`
+
 ## Configure GUT
 
 This action requires you to configure GUT using the `.gutconfig.json` file which would be located in the root directory of your project.

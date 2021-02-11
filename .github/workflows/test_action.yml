@@ -3,13 +3,26 @@ name: Test Action
 on: [push, pull_request]
 
 jobs:
-  TestAction:
+  test_1:
+    name: "Test Action with Container"
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Run Action
-      id: run_tests
       uses: ./
       with:
         directory: test_proj
+  test_2:
+    name: "Test Action Locally"
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Run Action
+      uses: ./
+      with:
+        directory: test_proj
+        useContainer: false

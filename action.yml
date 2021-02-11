@@ -5,6 +5,9 @@ inputs:
   containerImage:
     description: "The container to run tests inside of."
     default: "barichello/godot-ci:latest"
+  useContainer:
+    description: "Boolean value of whether or not to run container."
+    default: true
   directory:
     description: "The name directory to run tests in."
 runs:
