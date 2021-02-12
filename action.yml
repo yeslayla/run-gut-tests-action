@@ -8,6 +8,9 @@ inputs:
   useContainer:
     description: "Boolean value of whether or not to run container."
     default: true
+  godotExecutable:
+    description: "Path of Godot binary to call when running GUT tests."
+    default: godot
   directory:
     description: "The name directory to run tests in."
 runs:

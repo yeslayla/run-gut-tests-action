@@ -12254,6 +12254,7 @@ try {
   var docker_image = core.getInput('containerImage');
   var work_dir = core.getInput('directory');
   var use_container = core.getInput('useContainer');
+  var godot_executable = core.getInput('godotExecutable');
 
   if(work_dir)
   {
@@ -12274,7 +12275,7 @@ try {
       function onFinished(err, output)
       {
         console.log("Starting image...")
-        docker.run(docker_image, ['godot', '-d', '-s', '--path', '/project', 'addons/gut/gut_cmdln.gd'], process.stdout, 
+        docker.run(docker_image, [godot_executable, '-d', '-s', '--path', '/project', 'addons/gut/gut_cmdln.gd'], process.stdout, 
         
         // Mount working directory to `/project`
         { HostConfig: { Binds: [ process.cwd() + ":/project" ] }},
@@ -12303,7 +12304,7 @@ try {
   {
     console.log("Running GUT tests locally");
 
-    var result = spawnSync('godot -d -s --path . addons/gut/gut_cmdln.gd', {
+    var result = spawnSync(`${godot_executable} -d -s --path . addons/gut/gut_cmdln.gd`, {
       stdio: 'inherit',
       shell: true
     });
