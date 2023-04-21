@@ -21,6 +21,6 @@
   "dependencies": {
     "@actions/core": "^1.2.6",
     "@zeit/ncc": "^0.22.3",
-    "dockerode": "^3.2.1"
+    "dockerode": "^3.3.5"
   }
 }
